@@ -1,0 +1,98 @@
+@extends('backend.master')
+@section('content')
+<div class="" role="">
+    <div class="">
+        <div class="page-title">
+            <div class=""style="text-align: center">
+                <h3 style="color: whitesmoke; font-weight:bolder">Edit Users</h3>
+            </div>
+
+
+        </div>
+         <br>
+         <br>
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+
+                    <div class="x_content">
+
+                        <form action="{{route('user.update',$users->id)}}" method="post" class="form-horizontal form-label-left" novalidate>
+
+
+                            <span class="section">User Information</span>
+
+                            <div>
+
+                                @if($errors->any())
+                                @foreach($errors->all() as $error)
+                                <div>
+                                    <p class="alert alert-danger">{{$error}}</p>
+                                </div>
+                                @endforeach
+
+                                @endif
+
+                                @if(session()->has('message'))
+                                <div class="row" style="padding: 20px;">
+                                    <span class="alert alert-success">{{session()->get('message')}}</span>
+                                </div>
+                                @endif
+
+                            </div>
+
+
+                            @csrf
+                            @method('put')
+
+                            <div class="item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" style="color: black" for="lastName">Full Name
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input value="{{$users->fullname}}" id="lastName" class="form-control col-md-7 col-xs-12"
+                                        data-validate-length-range="6" data-validate-words="2" name="fullname"
+                                        placeholder="Full name" type="text">
+                                </div>
+                            </div>
+
+
+
+
+
+
+
+
+
+
+
+                            <div class="item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" style="color:black" for="telephone">Phone
+                                    Number
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input value="{{$users->phone}}"  type="tel" id="telephone" name="phone" required="required"
+                                        data-validate-length-range="8,20" placeholder="Enter phone number"
+                                        class="form-control col-md-7 col-xs-12">
+                                </div>
+                            </div>
+
+
+
+
+                            <div class="ln_solid"></div>
+                            <div class="form-group">
+                                <div class="col-md-6 col-md-offset-3">
+                                    <button type="submit" class="btn btn-danger">Cancel</button>
+                                    <button id="send" type="submit" class="btn btn-success">Update</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
